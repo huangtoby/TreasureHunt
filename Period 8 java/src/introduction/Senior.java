@@ -2,9 +2,9 @@ package introduction;
 
 public class Senior extends Student {
 	
-	String Score;
 	
-	public Senior(String name, String Score) {
+	
+	public Senior(String name) {
 		super(name);//constructs a student first
 	}
 	

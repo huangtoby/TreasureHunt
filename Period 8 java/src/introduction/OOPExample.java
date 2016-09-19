@@ -9,7 +9,7 @@ public class OOPExample {
 		Student jack = new Student("Jack");
 		
 		
-		jillian.talk();
+		((Student)jillian).talk();
 		joseph.talk();
 		jordan.talk();
 		jack.talk();

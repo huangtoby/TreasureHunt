@@ -2,11 +2,10 @@ package introduction;
 
 public class Junior extends Student {
 	
-	private String Classes;
+	
 
-	public Junior(String name, String color) {
+	public Junior(String name) {
 		super(name);//constructs a student first
-		Classes = color; 
 	}
 	
 	public void talk(){
