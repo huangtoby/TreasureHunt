@@ -7,7 +7,8 @@ public class RandomDiceRoll {
 		
 		
 		//declare variable,logic test, increment
-		for(int index = 0; index < 10;index++){
+		int totalRolls = 10000;
+		for(int index = 0; index < totalRolls;index++){
 			int result = rollFairDie();
 			System.out.println("roll #"+(index+1)+
 					": "+ result);
@@ -15,8 +16,10 @@ public class RandomDiceRoll {
 		}
 		//print the results
 		for(int i = 0; i < 6; i++){
+			double percentage = (double) 
+				((int)(1000*(double)results[i]/totalRolls))/10.0;
 			System.out.println((i+1)+" appeared " +
-					results[i]+" times.");
+					percentage+"%");
 		}
 	}
 	
