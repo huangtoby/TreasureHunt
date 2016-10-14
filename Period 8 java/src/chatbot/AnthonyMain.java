@@ -18,14 +18,20 @@ public class AnthonyMain {
 		promptForever();
 		}
 	
+	public static void createFields(){
+		input = new Scanner(System.in);
+		user = "";
+		school = new AnthonySchool();
+	}
+	
 	public static void promptName() {
 		print("enter your name");
 		user = input.nextLine();
-		print("Glad to meet you, "+user + "."
+		print("Glad to meet you, "+user+ "."
 				+"\nFor the rest of the time," 
-				+ "\nI will call you "+user
-				+".\nYou may call me Computer."
-				+ "\nWe should become friends." );
+				+"\nI will call you "+user+ "."
+				+"\nYou may call me Computer."
+				+"\nWe should become friends." );
 	}
 	
 	public static void promptForever(){
@@ -48,6 +54,10 @@ public class AnthonyMain {
 			}
 		}
 	}
+	public static String promptInput(){
+		String userInput = input.nextLine();
+		return userInput;
+	}
 	public static int findKeyword(String searchString,
 			String keyword,
 			int startPsn) {
@@ -64,7 +74,7 @@ public class AnthonyMain {
 		
 		//keeps searching until context keyword found
 		while(psn >= 0){
-			//assume preceeded and followed by space
+			//assume preceded and followed by space
 			String before = " ";
 			String after =" ";
 			//check character in front, if it exists.
@@ -86,7 +96,7 @@ public class AnthonyMain {
 			}
 			if (before.compareTo("a") < 0 &&
 					after.compareTo("a") < 0 &&
-				noNegations(searchString, psn)){
+					noNegations(searchString, psn)){
 				System.out.println("Found "+keyword+" at "
 						+psn);
 				return psn;
@@ -144,16 +154,7 @@ public class AnthonyMain {
 		return true;
 	}
 
-	public static String promptInput(){
-		String userInput = input.nextLine();
-		return userInput;
-	}
 	
-	public static void createFields(){
-		input = new Scanner(System.in);
-		user = "";
-		school = new AnthonySchool();
-	}
 	
 	public static void print(String s){
 		String printString = "";
