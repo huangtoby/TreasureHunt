@@ -4,35 +4,35 @@ public class ArrayPractice {
 	
 	static boolean[] boos3;
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		//how do you time a process?
 		long currentTime = System.currentTimeMillis();
-		
-		
+	
 		int x = 10;
 		increased(x);
 		System.out.println(x);
 		
 		String[] someStrings = new String[1000];
 		standardPopulate(someStrings);
-		String s = someStrings[999];
-		makeSpecial(s);
+		String s = "";
+		someStrings[999] = getASpecialString(s);
 		print(someStrings);		
-		
-		initializingArrayExample();
+		 
 		long endTime = System.currentTimeMillis();
 		System.out.println("The process took "
 				+(endTime-currentTime)+ "ms.");
 	}
 		
-	private static void increased(int x) {
-		x++;
-		
+	private static void increased(int x) 
+	{
+		x++;	
 	}
 
-	private static void makeSpecial(String s) {
+	private static String getASpecialString(String s) 
+	{
 		s = "My mom says I'm special";
-		
+		return s;
 	}
 
 	private static void print(String[] s){
