@@ -16,4 +16,9 @@ public class Period8CaveRoom {
 		
 	}
 
+	public void setConnection(Period8CaveRoom period8CaveRoom) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
