@@ -54,44 +54,6 @@ public class FultonAnthonyRoom {
 			}
 		}
 	}
-
-	public static void makePic(){
-		String[][] pic = new String[10][8];
-		for(int row = 0; row < pic.length; row++){
-			//populate with coordinates
-			for(int col = 0; col < pic[row].length; col++){
-				pic[row][col] = "";
-			}
-		}
-		
-		//top row and bottom row should be "_"
-		for(int col = 0; col < pic[0].length; col++){
-			pic[0][col] = "_";
-			pic[pic.length-1][col] = "_";
-		}
-		
-		//first and last column is "|"
-		for(int row = 1; row < pic.length; row++){
-			pic[row][0] = "|";
-			pic[row][pic[0].length-1] = "|";
-		}
-		
-//		//sun
-//		pic[1][1] = "-";
-//		pic[2][2] = "|";
-//		pic[1][2] = "0";
-//		pic[1][3] = "-";
-//		pic[2][1] = "/";
-//		pic[2][3] = "";
-		
-		
-		//grassy field
-		for(int row = 5; row < 7; row++){
-			for(int col = 1; col < pic[row].length-1; col++){
-				pic[row][col] = "w";
-			}
-		}
-	}
 	
 	public static void printPic(String[][] pic){
 		for(String[] row : pic){
