@@ -12,7 +12,7 @@ public class FultonAnthonyRoom {
 		mines = new boolean[10][10];
 		plantMines(mines);
 		String[][] field = createField(mines);
-		printPic(field);
+//		printPic(field);
 		createGrid(field);
 	}
 	
@@ -74,15 +74,19 @@ public class FultonAnthonyRoom {
 			map += "____";
 		}
 		map += "___\n";
-		for(boolean[] row: mines){
-			for(int textRow = 0; textRow < 3; textRow++){
-				for(CaveRoomPd8 cr : row){
+		for(int i = 0; i < field.length; i++){
+			for(int textRow = 0; textRow <3; textRow++){
+				for(int j = 0; j < field[i].length; j++){
 					String str = "|   ";
+					if(textRow == 2){
+						str = "|___";
+					}
 					map += str;
 				}
 			map += "|\n";
 			}
 		}
+		printPic(field);
 		CaveExplorer.print(map);
 	}
 	
