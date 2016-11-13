@@ -74,16 +74,40 @@ public class FultonAnthonyRoom {
 			map += "____";
 		}
 		map += "___\n";
-		for(boolean[] row: mines){
-			for(int textRow = 0; textRow < 3; textRow++){
-				for(CaveRoomPd8 cr : row){
-					String str = "|   ";
-					map += str;
+		String mid = "|   ";
+		String end = "|___";
+		for(int row = 0; row < field.length; row++){
+			for(int layer = 0; layer < 3; layer++){
+				for(int cell = 0; cell < field[row].length; cell++){
+					if(layer == 2){
+						map+= end;
+					}else{	
+					map += mid;
+					}
+					}
+				map += "|\n";	
 				}
-			map += "|\n";
-			}
+//			for(boolean[] row: mines){
+//			for(int textRow = 0; textRow < 3; textRow++){
+//				for(boolean cr : row){
+//					String str = "|___";
+//					map += str;
+//				}
+//			map += "|\n";
+//			}
+//		}
 		}
 		CaveExplorer.print(map);
 	}
+		
+		public static void minePlanting(String[][] field, int mines){
+			
+			for(int num = 0; num < mines; num++){
+				
+			}
+		}
+
+		
+	
 	
 }
