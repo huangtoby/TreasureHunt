@@ -13,7 +13,6 @@ public class FultonAnthonyRoom {
 		mines = new boolean[10][10];
 		plantMines(mines);
 		String[][] field = createField(mines);
-		printPic(field);
 		createGrid(field);
 	}
 	
