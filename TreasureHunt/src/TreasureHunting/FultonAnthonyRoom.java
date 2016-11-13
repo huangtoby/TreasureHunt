@@ -3,6 +3,7 @@ package TreasureHunting;
 public class FultonAnthonyRoom {
 	public static boolean[][] mines;
 	private static String map;
+	private static String map2;
 	
 	public static void main(String[] args){
 		mines();
@@ -70,51 +71,33 @@ public class FultonAnthonyRoom {
 	
 	public static void createGrid(String[][] field) {
 		map = " ";
+		map2 = " ";
 		for(int i = 0; i < field[0].length-1; i++){
 			map += "____";
+			map2 += "____";
 		}
 		map += "___\n";
-		
-		for(int row = 0; row < field.length; row++){
-			for(int layer = 0; layer < 3; layer++){
-				for(int cell = 0; cell < field[row].length; cell++){
-					String beg = "|   ";
-					String mid = "| "+field[row][cell]+" ";
-					String end = "|___";
-					if(layer == 0){
-						map+= beg;
+		map2 += "___\n";
+		for(int i = 0; i < field.length; i++){
+			for(int textRow = 0; textRow < 3; textRow++){
+				for(int j = 0; j < field[i].length; j++){
+					String str = "|" + i + " " + j;
+					String str2 = "|" + i + " " + j;
+					if(textRow == 1){
+						str = "| " + field[i][j] + " ";
+						str2 = "| ? ";
+					}if(textRow == 2){
+						str = "|___";
+						str2 = "|___";
 					}
-					if(layer == 1){
-						map+= mid;
-					}
-					if(layer == 2){
-						map+= end;
-					}
+					map += str;
+					map2 += str2;
 				}
-				map += "|\n";	
-				}
-
-//			for(boolean[] row: mines){
-//			for(int textRow = 0; textRow < 3; textRow++){
-//				for(boolean cr : row){
-//					String str = "|___";
-//					map += str;
-//				}
-//			map += "|\n";
-//			}
-//		}
-		}
-		CaveExplorer.print(map);
-	}
-		
-		public static void minePlanting(String[][] field, int mines){
-			
-			for(int num = 0; num < mines; num++){
-				
+			map += "|\n";
+			map2 += "|\n";
 			}
 		}
-
-		
-	
-	
+		CaveExplorer.print(map);
+		CaveExplorer.print(map2);
+	}
 }
