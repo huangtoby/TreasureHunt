@@ -1,19 +1,28 @@
 package TreasureHunting;
 
 public class FultonAnthonyRoom {
+	public static boolean[][] mines;
+	private static String map;
+	
+	public static void main(String[] args){
+		mines();
+	}
 
 	public static void mines(){
-		boolean[][] mines = new boolean[15][15];
+		mines = new boolean[10][10];
 		plantMines(mines);
 		String[][] field = createField(mines);
 		printPic(field);
+		createGrid(field);
 	}
 	
 	private static String[][] createField(boolean[][] mines) {
 		String[][] field = new String[mines.length][mines[0].length];
 		for(int row = 0; row < field.length; row++){
 			for(int col = 0; col < field[row].length; col++){
-				if(mines[row][col])field[row][col] = "x";
+				if(mines[row][col]){
+					field[row][col] = "x";
+				}
 				else{
 					field[row][col] = countNearby(mines,row,col);
 				}
@@ -39,15 +48,10 @@ public class FultonAnthonyRoom {
 	}
 
 	private static void plantMines(boolean[][] mines) {
-		int numberOfMines = 10;
+		int numberOfMines = 17;
 		while(numberOfMines > 0){
 			int row = (int)(Math.random() * mines.length);
 			int col = (int)(Math.random() * mines[0].length);
-			//this prevents the same mine being selected twice
-//			while(mines[row][col]){
-//				row = (int)(Math.random() * mines.length);
-//				col = (int)(Math.random() * mines[0].length);
-//			}
 			if(!mines[row][col]){
 				mines[row][col] = true;
 				numberOfMines--;
@@ -63,5 +67,23 @@ public class FultonAnthonyRoom {
 			System.out.println();
 		}
 	}
-
+	
+	public static void createGrid(String[][] field) {
+		map = " ";
+		for(int i = 0; i < field[0].length-1; i++){
+			map += "____";
+		}
+		map += "___\n";
+		for(boolean[] row: mines){
+			for(int textRow = 0; textRow < 3; textRow++){
+				for(CaveRoomPd8 cr : row){
+					String str = "|   ";
+					map += str;
+				}
+			map += "|\n";
+			}
+		}
+		CaveExplorer.print(map);
+	}
+	
 }
