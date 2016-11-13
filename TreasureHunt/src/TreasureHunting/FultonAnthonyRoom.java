@@ -74,19 +74,26 @@ public class FultonAnthonyRoom {
 			map += "____";
 		}
 		map += "___\n";
-		String mid = "|   ";
-		String end = "|___";
+		
 		for(int row = 0; row < field.length; row++){
 			for(int layer = 0; layer < 3; layer++){
 				for(int cell = 0; cell < field[row].length; cell++){
+					String beg = "|   ";
+					String mid = "| "+field[row][cell]+" ";
+					String end = "|___";
+					if(layer == 0){
+						map+= beg;
+					}
+					if(layer == 1){
+						map+= mid;
+					}
 					if(layer == 2){
 						map+= end;
-					}else{	
-					map += mid;
 					}
-					}
+				}
 				map += "|\n";	
 				}
+
 //			for(boolean[] row: mines){
 //			for(int textRow = 0; textRow < 3; textRow++){
 //				for(boolean cr : row){
