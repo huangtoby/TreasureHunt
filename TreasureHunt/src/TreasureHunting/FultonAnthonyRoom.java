@@ -79,7 +79,7 @@ public class FultonAnthonyRoom {
 				for(int j = 0; j < field[i].length; j++){
 					String str = "|   ";
 					if(textRow == 1){
-						str = "| " + field[i][j] + " "
+						str = "| " + field[i][j] + " ";
 					}if(textRow == 2){
 						str = "|___";
 					}
