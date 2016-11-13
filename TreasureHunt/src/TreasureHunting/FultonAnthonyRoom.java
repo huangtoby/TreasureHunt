@@ -78,7 +78,9 @@ public class FultonAnthonyRoom {
 			for(int textRow = 0; textRow <3; textRow++){
 				for(int j = 0; j < field[i].length; j++){
 					String str = "|   ";
-					if(textRow == 2){
+					if(textRow == 1){
+						str = "| " + field[i][j] + " "
+					}if(textRow == 2){
 						str = "|___";
 					}
 					map += str;
