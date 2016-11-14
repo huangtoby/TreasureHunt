@@ -1,19 +1,22 @@
 package TreasureHunting;
 
+import java.util.Scanner;
+
 public class FultonAnthonyRoom {
 	public static boolean[][] mines;
 	private static String map;
 	private static String map2;
+	private static boolean[][] isChecked;
+	public static Scanner in;
 	
 	public static void main(String[] args){
-		mines();
-	}
-
-	public static void mines(){
+		in = new Scanner(System.in);
 		mines = new boolean[10][10];
+		isChecked = new boolean[10][10];
 		plantMines(mines);
 		String[][] field = createField(mines);
 		createGrid(field);
+		callPos(field);
 	}
 	
 	private static String[][] createField(boolean[][] mines) {
@@ -68,6 +71,31 @@ public class FultonAnthonyRoom {
 		}
 	}
 	
+	public static void callPos(String[][] field){
+		boolean inLoop = true;
+		while(inLoop){
+			String row = in.nextLine();
+			int row2 = Integer.parseInt(row);
+			CaveExplorer.print("You inputed " + row);
+			String col = in.nextLine();
+			int col2 = Integer.parseInt(col);
+			CaveExplorer.print("You inputed " + col);
+			CaveExplorer.print("You inputed coordiantes " +"("+ row +","+ col+")");
+			if(field[row2][col2] == "x"){
+				inLoop = false;
+			}else{
+				clearBlock(field, row2, col2);
+			}
+		}
+		CaveExplorer.print("You ded");
+	}
+	
+	private static void clearBlock(String[][] field, int r, int c) {
+		if(Integer.parseInt(field[r][c]) == 0){
+			
+		}
+	}
+
 	public static void createGrid(String[][] field) {
 		map = " ";
 		map2 = " ";
