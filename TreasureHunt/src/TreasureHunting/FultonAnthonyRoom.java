@@ -3,7 +3,8 @@ package TreasureHunting;
 import java.util.Scanner;
 
 public class FultonAnthonyRoom {
-	public static boolean[][] mines;
+	private static boolean[][] mines;
+	private static String[][] quest;
 	private static String map;
 	private static String map2;
 	private static boolean[][] isChecked;
