@@ -4,43 +4,30 @@ public class TobyKevinRoom
 	{
 	
 	public static boolean[][] lights ;
-
+	private static String map;
+	
 	public static void main(String[] args)
 	{
 		lights = new boolean[5][5];
-		startGame(lights);
-		String[][] field = createField(lights);
+		String[][] field = startGame(lights);
+		createGrid(field);
 	}
 
-	public static String[][] createField(boolean[][]lights)
-	{
+	public static String[][] startGame(boolean [][] lights)
+	{	
 		String[][] field = new String[lights.length][lights[0].length];
 		for(int row = 0; row < field.length; row++)
 		{
 			for(int col = 0; col < field[row].length; col++)
 			{
-				field[row][col] = "X";
-			}
-		}
-		return field;
-	}
-
-
-	public static boolean[][] startGame(boolean [][] lights)
-	{	
-		boolean[][] field = new boolean[lights.length][lights[0].length];
-		for(int row = 0; row < field.length; row++)
-		{
-			for(int col = 0; col < field[row].length; col++)
-			{
-				int random = (int) (Math.random()* 1) + 0;
-				if (random == 1)
+				int random = (int) (Math.random()* 2) + 1;
+				if (random == 2)
 				{
-				field[row][col] = true;
+					field[row][col] = "X";
 				}
 				else
 				{
-					field[row][col] = false;
+					field[row][col] = "O";
 				} 
 			}
 		}
@@ -52,9 +39,9 @@ public class TobyKevinRoom
 
 	}
 
-	public static void printPic(String[][] pic)
+	public static void printPic(String[][] field)
 	{
-		for(String[] row : pic)
+		for(String[] row : field)
 		{
 			for(String col: row)
 			{
@@ -63,5 +50,27 @@ public class TobyKevinRoom
 			System.out.println();
 		}
 	}
-
+	public static void createGrid(String[][] field)
+	{
+		map = " ";
+		for(int i = 0; i < field[0].length-1; i++){
+			map += "____";
+		}
+		map += "___\n";
+		for(int i = 0; i < field.length; i++){
+			for(int textRow = 0; textRow < 3; textRow++){
+				for(int j = 0; j < field[i].length; j++){
+					String str = "|" + i + " " + j;
+					if(textRow == 1){
+						str = "| " + field[i][j] + " ";
+					}if(textRow == 2){
+						str = "|___";
+					}
+					map += str;
+				}
+			map += "|\n";
+			}
+		}
+		CaveExplorer.print(map);
+	}
 }
