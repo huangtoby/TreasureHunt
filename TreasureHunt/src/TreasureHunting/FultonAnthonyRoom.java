@@ -3,10 +3,9 @@ package TreasureHunting;
 import java.util.Scanner;
 
 public class FultonAnthonyRoom {
-	private static boolean[][] mines;
-	private static String[][] quest;
+	public static boolean[][] mines;
 	private static String map;
-	private static String map2;
+	private static String[][] arr;
 	private static boolean[][] isChecked;
 	public static Scanner in;
 	
@@ -16,8 +15,18 @@ public class FultonAnthonyRoom {
 		isChecked = new boolean[10][10];
 		plantMines(mines);
 		String[][] field = createField(mines);
-		createGrid(field);
+		currentArray();
 		callPos(field);
+		
+	}
+	
+	private static void currentArray(){
+		arr = new String[10][10];
+		for(int i = 0; i < arr.length; i++){
+			for( int j = 0; j < arr.length; j++){
+				arr[i][j] = "?";
+			}
+		}
 	}
 	
 	private static String[][] createField(boolean[][] mines) {
@@ -50,7 +59,7 @@ public class FultonAnthonyRoom {
 			return 1;
 		else return 0;
 	}
-
+	
 	private static void plantMines(boolean[][] mines) {
 		int numberOfMines = 17;
 		while(numberOfMines > 0){
@@ -75,6 +84,7 @@ public class FultonAnthonyRoom {
 	public static void callPos(String[][] field){
 		boolean inLoop = true;
 		while(inLoop){
+			createGrid(arr);
 			String row = in.nextLine();
 			int row2 = Integer.parseInt(row);
 			CaveExplorer.print("You inputed " + row);
@@ -82,10 +92,14 @@ public class FultonAnthonyRoom {
 			int col2 = Integer.parseInt(col);
 			CaveExplorer.print("You inputed " + col);
 			CaveExplorer.print("You inputed coordiantes " +"("+ row +","+ col+")");
-			if(field[row2][col2] == "x"){
-				inLoop = false;
+			if(row2 < field.length && col2 < field[0].length){
+				if(field[row2][col2] == "x"){
+					inLoop = false;
+				}else{
+					clearBlock(field, row2, col2);
+				}
 			}else{
-				clearBlock(field, row2, col2);
+				CaveExplorer.print("Please input something that exists"+"\n"+"Try Again");
 			}
 		}
 		CaveExplorer.print("You ded");
@@ -93,39 +107,45 @@ public class FultonAnthonyRoom {
 	
 	private static void clearBlock(String[][] field, int r, int c) {
 		if(Integer.parseInt(field[r][c]) == 0){
-			
+			arr[r][c] = field[r][c];
+			isChecked[r][c] = true;
+			for(int i = -1; i < 2; i++){
+				for(int j = -1; j < 2; j++){
+					if(r > 0 && r < field.length && c > 0 && c < field[0].length){
+						if(Integer.parseInt(field[r+i][c+j]) == Integer.parseInt(field[r][c])){
+							arr[r][c] = field[r][c];
+						}else{
+							clearBlock(field, r+i, c+j);
+						}
+					}
+				}
+			}
+		}else{
+			arr[r][c] = field[r][c];
+			isChecked[r][c] = true;
 		}
 	}
 
-	public static void createGrid(String[][] field) {
+	public static void createGrid(String[][] array) {
 		map = " ";
-		map2 = " ";
-		for(int i = 0; i < field[0].length-1; i++){
+		for(int i = 0; i < array[0].length-1; i++){
 			map += "____";
-			map2 += "____";
 		}
 		map += "___\n";
-		map2 += "___\n";
-		for(int i = 0; i < field.length; i++){
+		for(int i = 0; i < array.length; i++){
 			for(int textRow = 0; textRow < 3; textRow++){
-				for(int j = 0; j < field[i].length; j++){
+				for(int j = 0; j < array[i].length; j++){
 					String str = "|" + i + " " + j;
-					String str2 = "|" + i + " " + j;
 					if(textRow == 1){
-						str = "| " + field[i][j] + " ";
-						str2 = "| ? ";
+						str = "| " + array[i][j] + " ";
 					}if(textRow == 2){
 						str = "|___";
-						str2 = "|___";
 					}
 					map += str;
-					map2 += str2;
 				}
 			map += "|\n";
-			map2 += "|\n";
 			}
 		}
 		CaveExplorer.print(map);
-		CaveExplorer.print(map2);
 	}
 }
