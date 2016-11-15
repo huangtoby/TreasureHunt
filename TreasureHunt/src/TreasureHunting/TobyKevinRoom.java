@@ -14,6 +14,11 @@ public class TobyKevinRoom
 		lights = new boolean[5][5];
 		String[][] field = startGame(lights);
 		createGrid(field);
+		boolean solved= false;
+		while(solved == false)
+		{
+			changeLights(solved);
+		}
 	}
 
 	public static String[][] startGame(boolean [][] lights)
@@ -37,9 +42,22 @@ public class TobyKevinRoom
 		return field;
 	}
 
-	public static void changeLights()
+	public static void changeLights(boolean solved)
 	{
-
+		System.out.print("Enter the number of a box (1-25)");
+		while(!input.hasNextInt()) input.next();
+		{
+			System.out.print("Please enter a valid number");
+		}
+		if(input.nextInt() < 1 || input.nextInt() > 25)
+		{
+			System.out.print("Please enter a number between 1-25");
+		}
+		//method for changing
+		if()
+		{
+			solved = true;
+		}
 	}
 
 	public static void printPic(String[][] field)
