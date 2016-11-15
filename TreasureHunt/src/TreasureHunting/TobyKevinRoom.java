@@ -10,6 +10,7 @@ public class TobyKevinRoom
 	
 	public static void main(String[] args)
 	{
+		input = new Scanner(System.in);
 		lights = new boolean[5][5];
 		String[][] field = startGame(lights);
 		createGrid(field);
