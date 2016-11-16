@@ -60,6 +60,8 @@ public class FultonAnthonyRoom {
 		else return 0;
 	}
 	
+	
+	
 	private static void plantMines(boolean[][] mines) {
 		int numberOfMines = 17;
 		while(numberOfMines > 0){
@@ -83,8 +85,9 @@ public class FultonAnthonyRoom {
 	
 	public static void callPos(String[][] field){
 		boolean inLoop = true;
+		createGrid(field);
+		createGrid(arr);
 		while(inLoop){
-			createGrid(arr);
 			String row = in.nextLine();
 			int row2 = Integer.parseInt(row);
 			CaveExplorer.print("You inputed " + row);
@@ -97,24 +100,38 @@ public class FultonAnthonyRoom {
 					inLoop = false;
 				}else{
 					clearBlock(field, row2, col2);
+					createGrid(arr);
 				}
 			}else{
 				CaveExplorer.print("Please input something that exists"+"\n"+"Try Again");
 			}
+			if(checkWin(field)){
+				CaveExplorer.print("Congradulation you have won this game and obtained key");
+				inLoop = false;
+			}
 		}
 		CaveExplorer.print("You ded");
 	}
-	
+
+	private static boolean checkWin(String[][] field) {
+		for(int row = 0; row < field.length; row++){
+			for(int col = 0; col < field[0].length; col++){
+				if(field[row][col] != "x" && isChecked[row][col] == false){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	private static void clearBlock(String[][] field, int r, int c) {
-		if(Integer.parseInt(field[r][c]) == 0){
+		if(Integer.parseInt(field[r][c]) == 0 && isChecked[r][c] == false){
 			arr[r][c] = field[r][c];
 			isChecked[r][c] = true;
 			for(int i = -1; i < 2; i++){
 				for(int j = -1; j < 2; j++){
 					if(r > 0 && r < field.length && c > 0 && c < field[0].length){
-						if(Integer.parseInt(field[r+i][c+j]) == Integer.parseInt(field[r][c])){
-							arr[r][c] = field[r][c];
-						}else{
+						if(Integer.parseInt(field[r+i][c+j]) != Integer.parseInt(field[r][c])){
 							clearBlock(field, r+i, c+j);
 						}
 					}
