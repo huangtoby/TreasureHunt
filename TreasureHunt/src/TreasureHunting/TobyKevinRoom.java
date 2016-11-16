@@ -45,7 +45,8 @@ public class TobyKevinRoom
 	public static void changeLights(boolean solved)
 	{
 		System.out.print("Enter the number of a box (1-25)");
-		while(!input.hasNextInt()) input.next();
+		
+		if(!input.hasNextInt()) input.next();
 		{
 			System.out.print("Please enter a valid number");
 		}
@@ -54,9 +55,40 @@ public class TobyKevinRoom
 			System.out.print("Please enter a number between 1-25");
 		}
 		//method for changing
-		if()
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		checkWin(lights);
+	}
+
+	private static void checkWin(boolean[][] lights) 
+	{
+		for(int row = 0; row < lights.length;row++)
 		{
-			solved = true;
+			for (int col = 0; col < lights[row].length;col++)
+			{
+				if(lights[row][col] == true || lights[row][col] == false)
+				{
+					System.out.println("You have unlocked the hidden passage to the cave");
+					break;
+				}
+			}
 		}
 	}
 
