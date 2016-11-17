@@ -6,7 +6,6 @@ public class GameStartEvent implements Playable {
 	private static final String[] SEQUENCE_2 = {"You are going to have so much fun playing my 2-D games.","Take this map"};
 
 	public GameStartEvent() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public void play() {
