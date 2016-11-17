@@ -17,7 +17,7 @@ public class TobyKevinRoom
 		boolean solved= false;
 		while(solved == false)
 		{
-			changeLights(solved);
+			changeLights();
 		}
 	}
 
@@ -42,19 +42,23 @@ public class TobyKevinRoom
 		return field;
 	}
 
-	public static void changeLights(boolean solved)
+	public static void changeLights()
 	{
 		System.out.print("Enter the number of a box (1-25)");
-		
-		if(!input.hasNextInt()) input.next();
+		int x = Integer.valueOf(input.nextLine());
+		boolean inLoop = true;
+		while(inLoop == true)
 		{
-			System.out.print("Please enter a valid number");
+			if(Integer.valueOf(input.nextLine()).equals(null) || x > 25||x < 1)
+			{
+				System.out.println("Please enter a valid number.");
+			}
+			else
+			{
+				System.out.print("ok");
+				inLoop = false;
+			}
 		}
-		if(input.nextInt() < 1 || input.nextInt() > 25)
-		{
-			System.out.print("Please enter a number between 1-25");
-		}
-		//method for changing
 		
 		
 		
@@ -74,7 +78,7 @@ public class TobyKevinRoom
 		
 		
 		
-		checkWin(lights);
+		//checkWin(lights);
 	}
 
 	private static void checkWin(boolean[][] lights) 
