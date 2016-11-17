@@ -3,25 +3,24 @@ package TreasureHunting;
 import java.util.Scanner;
 
 public class FultonAnthonyRoom {
-	public static boolean[][] mines;
-	private static String map;
-	private static String[][] arr;
 	private static boolean[][] isChecked;
+	public static boolean[][] mines;
+	private static String[][] arr;
+	private static String map;
 	public static Scanner in;
 	
 	public static void main(String[] args){
 		in = new Scanner(System.in);
-		mines = new boolean[10][10];
-		isChecked = new boolean[10][10];
+		mines = new boolean[5][5];
+		isChecked = new boolean[5][5];
 		plantMines(mines);
 		String[][] field = createField(mines);
 		currentArray();
-		callPos(field);
-		
+		startGame(field);
 	}
 	
 	private static void currentArray(){
-		arr = new String[10][10];
+		arr = new String[5][5];
 		for(int i = 0; i < arr.length; i++){
 			for( int j = 0; j < arr.length; j++){
 				arr[i][j] = "?";
@@ -63,7 +62,7 @@ public class FultonAnthonyRoom {
 	
 	
 	private static void plantMines(boolean[][] mines) {
-		int numberOfMines = 17;
+		int numberOfMines = 4;
 		while(numberOfMines > 0){
 			int row = (int)(Math.random() * mines.length);
 			int col = (int)(Math.random() * mines[0].length);
@@ -83,34 +82,53 @@ public class FultonAnthonyRoom {
 		}
 	}
 	
-	public static void callPos(String[][] field){
+	private static boolean isValid(String input) {
+		String[] validKey = {"1","2","3","4","5","6","7","8","9","0","warn","normal"};
+		for(String key: validKey){
+			if(input.toLowerCase().equals(key)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static void startGame(String[][] field){
 		boolean inLoop = true;
+		boolean win = true;
 		createGrid(field);
 		createGrid(arr);
 		while(inLoop){
 			String row = in.nextLine();
-			int row2 = Integer.parseInt(row);
-			CaveExplorer.print("You inputed " + row);
-			String col = in.nextLine();
-			int col2 = Integer.parseInt(col);
-			CaveExplorer.print("You inputed " + col);
-			CaveExplorer.print("You inputed coordiantes " +"("+ row +","+ col+")");
-			if(row2 < field.length && col2 < field[0].length){
-				if(field[row2][col2] == "x"){
-					inLoop = false;
-				}else{
-					clearBlock(field, row2, col2);
-					createGrid(arr);
+			if(isValid(row)){
+				CaveExplorer.print("You inputed " + row);
+				String col = in.nextLine();
+				if(isValid(col)){
+					CaveExplorer.print("You inputed " + col);
+					CaveExplorer.print("You inputed coordiantes " +"("+ row +","+ col+")");
+					if(Integer.parseInt(row) < field.length && Integer.parseInt(row) > -1 
+							&& Integer.parseInt(col) > -1 && Integer.parseInt(col) < field[0].length){
+						if(field[Integer.parseInt(row)][Integer.parseInt(col)] == "x"){
+							createGrid(field);
+							win = false;
+							inLoop = false;
+						}else{
+							clearBlock(field, Integer.parseInt(row), Integer.parseInt(col));
+							createGrid(arr);
+						}
+					}else{
+						CaveExplorer.print("Please input something that exists"+"\n"+"Try Again");
+					}
+					if(checkWin(field)){
+						inLoop = false;
+					}
 				}
-			}else{
-				CaveExplorer.print("Please input something that exists"+"\n"+"Try Again");
-			}
-			if(checkWin(field)){
-				CaveExplorer.print("Congradulation you have won this game and obtained key");
-				inLoop = false;
 			}
 		}
-		CaveExplorer.print("You ded");
+		if(win){
+			CaveExplorer.print("Congradulation you have won this game and obtained key");
+		}else{
+			CaveExplorer.print("You ded");
+		}
 	}
 
 	private static boolean checkWin(String[][] field) {
@@ -125,22 +143,22 @@ public class FultonAnthonyRoom {
 	}
 
 	private static void clearBlock(String[][] field, int r, int c) {
-		if(Integer.parseInt(field[r][c]) == 0 && isChecked[r][c] == false){
+//		if(Integer.parseInt(field[r][c]) == 0 && isChecked[r][c] == false){
+//			arr[r][c] = field[r][c];
+//			isChecked[r][c] = true;
+//			for(int i = -1; i < 2; i++){
+//				for(int j = -1; j < 2; j++){
+//					if(r > 0 && r < field.length && c > 0 && c < field[0].length){
+//						if(Integer.parseInt(field[r+i][c+j]) != Integer.parseInt(field[r][c])){
+//							clearBlock(field, r+i, c+j);
+//						}
+//					}
+//				}
+//			}
+//		}else{
 			arr[r][c] = field[r][c];
 			isChecked[r][c] = true;
-			for(int i = -1; i < 2; i++){
-				for(int j = -1; j < 2; j++){
-					if(r > 0 && r < field.length && c > 0 && c < field[0].length){
-						if(Integer.parseInt(field[r+i][c+j]) != Integer.parseInt(field[r][c])){
-							clearBlock(field, r+i, c+j);
-						}
-					}
-				}
-			}
-		}else{
-			arr[r][c] = field[r][c];
-			isChecked[r][c] = true;
-		}
+//		}
 	}
 
 	public static void createGrid(String[][] array) {
