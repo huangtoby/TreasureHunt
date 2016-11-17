@@ -156,8 +156,17 @@ public class FultonAnthonyRoom {
 //				}
 //			}
 //		}else{
+		CaveExplorer.print("Would you like to reveal the cell or mark it as a mine?\n"+
+				"Be aware that when a cell is revealed, it cannot be marked as a mine.");
+		String response = in.nextLine();
+		if(response.equals("reveal") && isChecked[r][c] == false){
 			arr[r][c] = field[r][c];
 			isChecked[r][c] = true;
+		}else if(response.equals("mark") && isChecked[r][c] == false){
+			arr[r][c] = "!";
+		}else{
+			CaveExplorer.print("Please input 'mark' or 'reveal'");
+		}
 //		}
 	}
 
