@@ -83,7 +83,7 @@ public class FultonAnthonyRoom {
 	}
 	
 	private static boolean isValid(String input) {
-		String[] validKey = {"1","2","3","4","5","6","7","8","9","0","warn","normal"};
+		String[] validKey = {"1","2","3","4","5","6","7","8","9","0"};
 		for(String key: validKey){
 			if(input.toLowerCase().equals(key)){
 				return true;
@@ -107,13 +107,28 @@ public class FultonAnthonyRoom {
 					CaveExplorer.print("You inputed coordiantes " +"("+ row +","+ col+")");
 					if(Integer.parseInt(row) < field.length && Integer.parseInt(row) > -1 
 							&& Integer.parseInt(col) > -1 && Integer.parseInt(col) < field[0].length){
-						if(field[Integer.parseInt(row)][Integer.parseInt(col)] == "x"){
-							createGrid(field);
-							win = false;
-							inLoop = false;
-						}else{
-							clearBlock(field, Integer.parseInt(row), Integer.parseInt(col));
-							createGrid(arr);
+						CaveExplorer.print("Would you like to reveal the cell or mark it as a mine?\n"+
+								"Be aware that when a cell is revealed, it cannot be marked as a mine.");
+						while(true){
+							String response = in.nextLine();
+							String output = response.toLowerCase();
+							if(output.equals("reveal")){
+								if(field[Integer.parseInt(row)][Integer.parseInt(col)] == "x"){
+									createGrid(field);
+									win = false;
+									inLoop = false;
+								}else{
+									clearBlock(field, Integer.parseInt(row), Integer.parseInt(col));
+									createGrid(arr);
+									break;
+								}	
+							}else if(output.equals("mark")){
+								mark(field, Integer.parseInt(row), Integer.parseInt(col));
+								createGrid(arr);
+								break;
+							}else{
+								CaveExplorer.print("Please input 'mark' or 'reveal'");						
+							}
 						}
 					}else{
 						CaveExplorer.print("Please input something that exists"+"\n"+"Try Again");
@@ -143,39 +158,102 @@ public class FultonAnthonyRoom {
 	}
 
 	private static void clearBlock(String[][] field, int r, int c) {
-//		if(Integer.parseInt(field[r][c]) == 0 && isChecked[r][c] == false){
-//			arr[r][c] = field[r][c];
-//			isChecked[r][c] = true;
-//			for(int i = -1; i < 2; i++){
-//				for(int j = -1; j < 2; j++){
-//					if(r > 0 && r < field.length && c > 0 && c < field[0].length){
-//						if(Integer.parseInt(field[r+i][c+j]) != Integer.parseInt(field[r][c])){
-//							clearBlock(field, r+i, c+j);
-//						}
-//					}
-//				}
-//			}
-//		}else{
-		CaveExplorer.print("Would you like to reveal the cell or mark it as a mine?\n"+
-				"Be aware that when a cell is revealed, it cannot be marked as a mine.");
-		String response = in.nextLine();
-		String output = response.toLowerCase();
-		if(output.equals("reveal") && isChecked[r][c] == false){
-			arr[r][c] = field[r][c];
-			isChecked[r][c] = true;
-		}else if(output.equals("mark") && isChecked[r][c] == false){
-			arr[r][c] = "!";
-		}else{
-			CaveExplorer.print("Please input 'mark' or 'reveal'");
+		if(isChecked[r][c] == false){
+			if(r == 0 && c == 0){
+				clearBlock(field, r, c+1);
+				clearBlock(field, r+1, c);
+				clearBlock(field, r+1, c+1);
+				arr[r][c] = field[r][c];
+				isChecked[r][c] = true;
+				return;
+			}else if(r == field.length-1 && c == field[0].length-1){
+				clearBlock(field, r-1, c-1);
+				clearBlock(field, r-1, c);
+				clearBlock(field, r, c-1);
+				arr[r][c] = field[r][c];
+				isChecked[r][c] = true;
+				return;
+			}else if(r == 0 && c == field[0].length-1){
+				clearBlock(field, r, c-1);
+				clearBlock(field, r+1, c-1);
+				clearBlock(field, r+1, c);
+				arr[r][c] = field[r][c];
+				isChecked[r][c] = true;
+				return;
+			}else if(r == field.length-1 && c == 0){
+				clearBlock(field, r-1, c);
+				clearBlock(field, r-1, c+1);
+				clearBlock(field, r, c+1);
+				arr[r][c] = field[r][c];
+				isChecked[r][c] = true;
+				return;
+			}else{
+				if(r == 0){
+					clearBlock(field, r, c-1);
+					clearBlock(field, r, c+1);
+					clearBlock(field, r+1, c-1);
+					clearBlock(field, r+1, c);
+					clearBlock(field, r+1, c+1);
+					arr[r][c] = field[r][c];
+					isChecked[r][c] = true;
+					return;
+				}else if(r == field.length-1){
+					clearBlock(field, r-1, c-1);
+					clearBlock(field, r-1, c);
+					clearBlock(field, r-1, c+1);
+					clearBlock(field, r, c-1);
+					clearBlock(field, r, c+1);
+					arr[r][c] = field[r][c];
+					isChecked[r][c] = true;
+					return;
+				}else if(c == 0){
+					clearBlock(field, r+1, c);
+					clearBlock(field, r+1, c+1);
+					clearBlock(field, r-1, c);
+					clearBlock(field, r-1, c+1);
+					clearBlock(field, r, c+1);
+					arr[r][c] = field[r][c];
+					isChecked[r][c] = true;
+					return;
+				}else if(c == field[0].length-1){
+					clearBlock(field, r-1, c-1);
+					clearBlock(field, r-1, c);
+					clearBlock(field, r, c-1);
+					clearBlock(field, r+1, c-1);
+					clearBlock(field, r+1, c);
+					arr[r][c] = field[r][c];
+					isChecked[r][c] = true;
+					return;
+				}else{
+					clearBlock(field, r-1, c-1);
+					clearBlock(field, r-1, c);
+					clearBlock(field, r-1, c+1);
+					clearBlock(field, r, c-1);
+					clearBlock(field, r, c+1);
+					clearBlock(field, r+1, c-1);
+					clearBlock(field, r+1, c);
+					clearBlock(field, r+1, c+1);
+					arr[r][c] = field[r][c];
+					isChecked[r][c] = true;
+					return;
+				}
+			}
 		}
-//		}
+//					clearBlock(field, r-1, c-1);
+//					clearBlock(field, r-1, c);
+//					clearBlock(field, r-1, c+1);
+//					clearBlock(field, r, c-1);
+//					clearBlock(field, r, c+1);
+//					clearBlock(field, r+1, c-1);
+//					clearBlock(field, r+1, c);
+//					clearBlock(field, r+1, c+1);
 	}
-
-	private static String toLowerCase(String nextLine) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	private static void mark(String[][] field, int r, int c){
+		arr[r][c] = "!";
+		isChecked[r][c] = true;
 	}
-
+	
 	public static void createGrid(String[][] array) {
 		map = " ";
 		for(int i = 0; i < array[0].length-1; i++){
