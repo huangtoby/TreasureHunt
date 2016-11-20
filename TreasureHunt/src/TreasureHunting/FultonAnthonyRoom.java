@@ -95,7 +95,7 @@ public class FultonAnthonyRoom {
 	public static void startGame(String[][] field){
 		boolean inLoop = true;
 		boolean win = false;
-		createGrid(field);
+//		createGrid(field);
 		createGrid(arr);
 		while(inLoop){
 			String row = in.nextLine();
