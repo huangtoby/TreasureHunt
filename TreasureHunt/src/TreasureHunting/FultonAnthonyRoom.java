@@ -11,8 +11,8 @@ public class FultonAnthonyRoom {
 	
 	public static void main(String[] args){
 		in = new Scanner(System.in);
-		mines = new boolean[5][5];
-		isChecked = new boolean[5][5];
+		mines = new boolean[2][2];
+		isChecked = new boolean[2][2];
 		plantMines(mines);
 		String[][] field = createField(mines);
 		currentArray();
@@ -20,7 +20,7 @@ public class FultonAnthonyRoom {
 	}
 	
 	private static void currentArray(){
-		arr = new String[5][5];
+		arr = new String[2][2];
 		for(int i = 0; i < arr.length; i++){
 			for( int j = 0; j < arr.length; j++){
 				arr[i][j] = "?";
@@ -114,6 +114,7 @@ public class FultonAnthonyRoom {
 							if(output.equals("reveal")){
 								if(field[Integer.parseInt(row)][Integer.parseInt(col)] == "x"){
 									createGrid(field);
+									CaveExplorer.print("You ded");
 									inLoop = false;
 								}else{
 									clearBlock(field, Integer.parseInt(row), Integer.parseInt(col));
@@ -124,6 +125,10 @@ public class FultonAnthonyRoom {
 								mark(field, Integer.parseInt(row), Integer.parseInt(col));
 								createGrid(arr);
 								break;
+							}else if(output.equals("neither")){
+								win = true;
+								inLoop = false;
+								break;
 							}else{
 								CaveExplorer.print("Please input 'mark' or 'reveal'");						
 							}
@@ -132,17 +137,16 @@ public class FultonAnthonyRoom {
 						CaveExplorer.print("Please input something that exists"+"\n"+"Try Again");
 					}
 					if(checkWin(field)){
-						inLoop = false;
 						win = true;
+						inLoop = false;
 					}
 				}
 			}
 		}
 		if(win){
-			CaveExplorer.print("Congradulation you have won this game and obtained key");
-		}else{
-			CaveExplorer.print("You ded");
+			CaveExplorer.print("Congradulation you have won this game and obtained the key");
 		}
+		CaveExplorer.print("you have failed");
 	}
 
 	private static boolean checkWin(String[][] field) {
