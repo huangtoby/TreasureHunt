@@ -55,7 +55,7 @@ public class InventoryNockles {
 
 	public String getDescription() {
 			if(hasMap)return map;
-			else return "You have no inventory.";
+			else return "There is no door on this side.";
 	}
 
 }
