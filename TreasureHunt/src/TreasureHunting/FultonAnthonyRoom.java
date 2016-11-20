@@ -11,8 +11,8 @@ public class FultonAnthonyRoom {
 	
 	public static void main(String[] args){
 		in = new Scanner(System.in);
-		mines = new boolean[2][2];
-		isChecked = new boolean[2][2];
+		mines = new boolean[5][5];
+		isChecked = new boolean[5][5];
 		plantMines(mines);
 		String[][] field = createField(mines);
 		currentArray();
@@ -20,7 +20,7 @@ public class FultonAnthonyRoom {
 	}
 	
 	private static void currentArray(){
-		arr = new String[2][2];
+		arr = new String[5][5];
 		for(int i = 0; i < arr.length; i++){
 			for( int j = 0; j < arr.length; j++){
 				arr[i][j] = "?";
@@ -62,7 +62,7 @@ public class FultonAnthonyRoom {
 	
 	
 	private static void plantMines(boolean[][] mines) {
-		int numberOfMines = 1;
+		int numberOfMines = 10;
 		while(numberOfMines > 0){
 			int row = (int)(Math.random() * mines.length);
 			int col = (int)(Math.random() * mines[0].length);
@@ -73,14 +73,14 @@ public class FultonAnthonyRoom {
 		}
 	}
 	
-	public static void printPic(String[][] pic){
-		for(String[] row : pic){
-			for(String col: row){
-				System.out.print(col);
-			}
-			System.out.println();
-		}
-	}
+//	public static void printPic(String[][] pic){
+//		for(String[] row : pic){
+//			for(String col: row){
+//				System.out.print(col);
+//			}
+//			System.out.println();
+//		}
+//	}
 	
 	private static boolean isValid(String input) {
 		String[] validKey = {"1","2","3","4","5","6","7","8","9","0"};
