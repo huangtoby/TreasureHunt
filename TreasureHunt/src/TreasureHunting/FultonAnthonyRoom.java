@@ -62,7 +62,7 @@ public class FultonAnthonyRoom {
 	
 	
 	private static void plantMines(boolean[][] mines) {
-		int numberOfMines = 4;
+		int numberOfMines = 1;
 		while(numberOfMines > 0){
 			int row = (int)(Math.random() * mines.length);
 			int col = (int)(Math.random() * mines[0].length);
@@ -94,7 +94,7 @@ public class FultonAnthonyRoom {
 	
 	public static void startGame(String[][] field){
 		boolean inLoop = true;
-		boolean win = true;
+		boolean win = false;
 		createGrid(field);
 		createGrid(arr);
 		while(inLoop){
@@ -107,15 +107,13 @@ public class FultonAnthonyRoom {
 					CaveExplorer.print("You inputed coordiantes " +"("+ row +","+ col+")");
 					if(Integer.parseInt(row) < field.length && Integer.parseInt(row) > -1 
 							&& Integer.parseInt(col) > -1 && Integer.parseInt(col) < field[0].length){
-						CaveExplorer.print("Would you like to reveal the cell or mark it as a mine?\n"+
-								"Be aware that when a cell is revealed, it cannot be marked as a mine.");
+						CaveExplorer.print("Would you like to reveal the cell or mark it as a mine?\n");
 						while(true){
 							String response = in.nextLine();
 							String output = response.toLowerCase();
 							if(output.equals("reveal")){
 								if(field[Integer.parseInt(row)][Integer.parseInt(col)] == "x"){
 									createGrid(field);
-									win = false;
 									inLoop = false;
 								}else{
 									clearBlock(field, Integer.parseInt(row), Integer.parseInt(col));
@@ -135,6 +133,7 @@ public class FultonAnthonyRoom {
 					}
 					if(checkWin(field)){
 						inLoop = false;
+						win = true;
 					}
 				}
 			}
@@ -159,101 +158,13 @@ public class FultonAnthonyRoom {
 
 	private static void clearBlock(String[][] field, int r, int c) {
 		if(isChecked[r][c] == false){
-			if(r == 0 && c == 0){
-				clearBlock(field, r, c+1);
-				clearBlock(field, r+1, c);
-				clearBlock(field, r+1, c+1);
-				arr[r][c] = field[r][c];
-				isChecked[r][c] = true;
-				return;
-			}else if(r == field.length-1 && c == field[0].length-1){
-				clearBlock(field, r-1, c-1);
-				clearBlock(field, r-1, c);
-				clearBlock(field, r, c-1);
-				arr[r][c] = field[r][c];
-				isChecked[r][c] = true;
-				return;
-			}else if(r == 0 && c == field[0].length-1){
-				clearBlock(field, r, c-1);
-				clearBlock(field, r+1, c-1);
-				clearBlock(field, r+1, c);
-				arr[r][c] = field[r][c];
-				isChecked[r][c] = true;
-				return;
-			}else if(r == field.length-1 && c == 0){
-				clearBlock(field, r-1, c);
-				clearBlock(field, r-1, c+1);
-				clearBlock(field, r, c+1);
-				arr[r][c] = field[r][c];
-				isChecked[r][c] = true;
-				return;
-			}else{
-				if(r == 0){
-					clearBlock(field, r, c-1);
-					clearBlock(field, r, c+1);
-					clearBlock(field, r+1, c-1);
-					clearBlock(field, r+1, c);
-					clearBlock(field, r+1, c+1);
-					arr[r][c] = field[r][c];
-					isChecked[r][c] = true;
-					return;
-				}else if(r == field.length-1){
-					clearBlock(field, r-1, c-1);
-					clearBlock(field, r-1, c);
-					clearBlock(field, r-1, c+1);
-					clearBlock(field, r, c-1);
-					clearBlock(field, r, c+1);
-					arr[r][c] = field[r][c];
-					isChecked[r][c] = true;
-					return;
-				}else if(c == 0){
-					clearBlock(field, r+1, c);
-					clearBlock(field, r+1, c+1);
-					clearBlock(field, r-1, c);
-					clearBlock(field, r-1, c+1);
-					clearBlock(field, r, c+1);
-					arr[r][c] = field[r][c];
-					isChecked[r][c] = true;
-					return;
-				}else if(c == field[0].length-1){
-					clearBlock(field, r-1, c-1);
-					clearBlock(field, r-1, c);
-					clearBlock(field, r, c-1);
-					clearBlock(field, r+1, c-1);
-					clearBlock(field, r+1, c);
-					arr[r][c] = field[r][c];
-					isChecked[r][c] = true;
-					return;
-				}else{
-					clearBlock(field, r-1, c-1);
-					clearBlock(field, r-1, c);
-					clearBlock(field, r-1, c+1);
-					clearBlock(field, r, c-1);
-					clearBlock(field, r, c+1);
-					clearBlock(field, r+1, c-1);
-					clearBlock(field, r+1, c);
-					clearBlock(field, r+1, c+1);
-					arr[r][c] = field[r][c];
-					isChecked[r][c] = true;
-					return;
-				}
-			}
-		}
-//					clearBlock(field, r-1, c-1);
-//					clearBlock(field, r-1, c);
-//					clearBlock(field, r-1, c+1);
-//					clearBlock(field, r, c-1);
-//					clearBlock(field, r, c+1);
-//					clearBlock(field, r+1, c-1);
-//					clearBlock(field, r+1, c);
-//					clearBlock(field, r+1, c+1);
 		arr[r][c] = field[r][c];
 		isChecked[r][c] = true;
+		}
 	}
 	
 	private static void mark(String[][] field, int r, int c){
 		arr[r][c] = "!";
-		isChecked[r][c] = true;
 	}
 	
 	public static void createGrid(String[][] array) {
