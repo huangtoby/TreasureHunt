@@ -247,6 +247,8 @@ public class FultonAnthonyRoom {
 //					clearBlock(field, r+1, c-1);
 //					clearBlock(field, r+1, c);
 //					clearBlock(field, r+1, c+1);
+		arr[r][c] = field[r][c];
+		isChecked[r][c] = true;
 	}
 	
 	private static void mark(String[][] field, int r, int c){
