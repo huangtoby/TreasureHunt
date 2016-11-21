@@ -27,7 +27,7 @@ public class CaveExplorer {
 		currentRoom = caves[2][3];
 		caves[3][3] = new EventRoom("This is where you found the map.", new GameStartEvent());
 		caves[0][3] = new EventRoom("This is where you played minesweeper.", new FultonAnthonyRoom());
-		//caves[3][2] = new EventRoom("This is where you got into the cave.", new TobyKevinRoom());
+		caves[3][2] = new EventRoom("This is where you got into the cave.", new TobyKevinRoom());
 		if(currentRoom == caves[1][3]){
 			print("you duied");
 		}

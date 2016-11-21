@@ -13,8 +13,8 @@ public class FultonAnthonyRoom implements Playable{
 	private String[][] field;
 	public  FultonAnthonyRoom(){
 		in = new Scanner(System.in);
-		mines = new boolean[5][5];
-		isChecked = new boolean[5][5];
+		mines = new boolean[10][10];
+		isChecked = new boolean[10][10];
 		plantMines(mines);
 		field = createField(mines);
 		currentArray();
@@ -22,7 +22,7 @@ public class FultonAnthonyRoom implements Playable{
 	}
 	
 	private static void currentArray(){
-		arr = new String[5][5];
+		arr = new String[10][10];
 		for(int i = 0; i < arr.length; i++){
 			for( int j = 0; j < arr.length; j++){
 				arr[i][j] = "?";
@@ -64,7 +64,7 @@ public class FultonAnthonyRoom implements Playable{
 	
 	
 	private static void plantMines(boolean[][] mines) {
-		int numberOfMines = 10;
+		int numberOfMines = 17;
 		while(numberOfMines > 0){
 			int row = (int)(Math.random() * mines.length);
 			int col = (int)(Math.random() * mines[0].length);
