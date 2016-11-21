@@ -2,21 +2,23 @@ package TreasureHunting;
 
 import java.util.Scanner;
 
-public class FultonAnthonyRoom {
+import TreasureHunting.Playable;
+
+public class FultonAnthonyRoom implements Playable{
 	private static boolean[][] isChecked;
 	public static boolean[][] mines;
 	private static String[][] arr;
 	private static String map;
 	public static Scanner in;
-	
-	public static void main(String[] args){
+	private String[][] field;
+	public  FultonAnthonyRoom(){
 		in = new Scanner(System.in);
 		mines = new boolean[5][5];
 		isChecked = new boolean[5][5];
 		plantMines(mines);
-		String[][] field = createField(mines);
+		field = createField(mines);
 		currentArray();
-		startGame(field);
+		
 	}
 	
 	private static void currentArray(){
@@ -92,7 +94,11 @@ public class FultonAnthonyRoom {
 		return false;
 	}
 	
-	public static void startGame(String[][] field){
+	public static void main(String[] args){
+		new FultonAnthonyRoom().play();
+	}
+	
+	public void play(){
 		boolean inLoop = true;
 		boolean win = false;
 //		createGrid(field);
@@ -144,7 +150,8 @@ public class FultonAnthonyRoom {
 			}
 		}
 		if(win){
-			CaveExplorer.print("Congradulation you have won this game and obtained the key");
+			CaveExplorer.print("Congratulation you have won this game and obtained the key");
+			CaveExplorer.key2 = true;
 		}
 		CaveExplorer.print("you have failed");
 	}
