@@ -12,6 +12,9 @@ public class CaveExplorer {
 	
 	public static InventoryNockles inventory;
 	
+	public static boolean Key1 = false;
+	public static boolean Key2 = false;
+	
 	public static void main(String[] args) {
 		in = new Scanner(System.in);
 		caves = new CaveRoomPd8 [4][4];

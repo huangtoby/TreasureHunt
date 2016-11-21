@@ -90,6 +90,7 @@ public class TobyKevinRoom
 				if(lights[row][col] == true || lights[row][col] == false)
 				{
 					System.out.println("You have unlocked the hidden passage to the cave");
+					CaveExplorer.Key2 = true;
 					break;
 				}
 			}

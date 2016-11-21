@@ -145,6 +145,7 @@ public class FultonAnthonyRoom {
 		}
 		if(win){
 			CaveExplorer.print("Congradulation you have won this game and obtained the key");
+			CaveExplorer.Key1 = true;
 		}
 		CaveExplorer.print("you have failed");
 	}
