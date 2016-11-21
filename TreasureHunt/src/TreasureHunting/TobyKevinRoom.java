@@ -14,27 +14,30 @@ public class TobyKevinRoom
 		lights = new String[5][5];
 		String[][] field = startGame(lights);
 		createGrid(field);
-		boolean solved = false;
-		while(solved == false)
+		boolean solved = true;
+		A : while(solved)
 		{
 			changeLights(field);
-//			checkWin();
-//			if(checkWin() == true)
-//			{
-//				break;
-//			}
-//			
+			if(checkWin() == true)
+			{
+				solved = false;
+				break A;
+			}
+			
 		}
+		System.out.println("You have 'beaten' this game");
 	}
-//
-//	private static boolean checkWin() 
-//	{
-//		for(int row = 0; row < field.length; row++){
-//			for(int col = 0; col < field[0].length; col++){
-//			}
-//		}	
-//		return false;
-//	}
+
+	private static boolean checkWin() 
+	{
+		System.out.println("Continue?");
+		if(input.nextLine().toLowerCase().indexOf("yes")<0)
+		{
+			return true;
+		}
+		return false;
+		
+	}
 
 	public static String[][] startGame(String[][] lights2)
 	{	
@@ -61,6 +64,7 @@ public class TobyKevinRoom
 	{
 		System.out.print("Enter the number of a box (1-25)");
 		int number = 0;
+		
 		while(!input.hasNextInt())
 		{
 			System.out.print("That is not a valid input.");
@@ -87,6 +91,7 @@ public class TobyKevinRoom
 		swap(field, number - 5);
 		swap(field, number + 5);
 		createGrid(field);
+		checkWin();
 	}
 
 	private static void swap(String[][] input, int number) 
