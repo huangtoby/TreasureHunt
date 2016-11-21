@@ -2,13 +2,17 @@ package TreasureHunting;
 
 import java.util.Scanner;
 
-public class TobyKevinRoom 
+public class TobyKevinRoom implements Playable
 	{
 	public static String[][] lights ;
 	private static String map;
 	public static Scanner input;
 	
-	public static void main(String[] args)
+	public static void main(String[] args){
+		new TobyKevinRoom().play();
+	}
+	
+	public void play()
 	{
 		input = new Scanner(System.in);
 		lights = new String[5][5];
