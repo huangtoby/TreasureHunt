@@ -30,9 +30,6 @@ public class CaveExplorer {
 		caves[3][3] = new EventRoom("This is where you found the map.", new GameStartEvent());
 		caves[0][3] = new EventRoom("This is where you played minesweeper.", new FultonAnthonyRoom());
 		caves[3][2] = new EventRoom("This is where you got into the cave.", new TobyKevinRoom());
-		if(currentRoom == caves[1][3]){
-			print("you duied");
-		}
 		currentRoom.enter();
 
 		caves[2][3].setConnection(CaveRoomPd8.SOUTH, caves[3][3], new Door());//start, lights out
@@ -56,7 +53,7 @@ public class CaveExplorer {
 
 	private static void startExploring() {
 		while(Looped){
-			if(currentRoom == caves[1][1]){ 
+			if(currentRoom == caves[0][1]){ 
 				Looped = false;
 			}
 			print(inventory.getDescription());

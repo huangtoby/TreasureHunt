@@ -155,8 +155,9 @@ public class FultonAnthonyRoom implements Playable{
 			CaveExplorer.print("You have obtained key(2/2). Now find the Trasure Room!");
 			CaveExplorer.Key1 = true;
 
-		}
+		}else{
 		CaveExplorer.print("you have failed");
+		}
 	}
 
 	private static boolean checkWin(String[][] field) {
