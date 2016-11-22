@@ -2,28 +2,50 @@ package TreasureHunting;
 
 import java.util.Scanner;
 
-public class TobyKevinRoom 
+public class TobyKevinRoom implements Playable
 	{
-	public static boolean[][] lights ;
+	public static String[][] lights ;
 	private static String map;
 	public static Scanner input;
 	
-	public static void main(String[] args)
+	public static void main(String[] args){
+		new TobyKevinRoom().play();
+	}
+	
+	public void play()
 	{
 		input = new Scanner(System.in);
-		lights = new boolean[5][5];
+		lights = new String[5][5];
 		String[][] field = startGame(lights);
 		createGrid(field);
-		boolean solved= false;
-		while(solved == false)
+		boolean solved = true;
+		A : while(solved)
 		{
-			changeLights();
+			changeLights(field);
+			if(checkWin() == true)
+			{
+				solved = false;
+				break A;
+			}
+			
 		}
+		System.out.println("You have 'beaten' this game");
 	}
 
-	public static String[][] startGame(boolean [][] lights)
+	private static boolean checkWin() 
+	{
+		System.out.println("Continue?");
+		if(input.nextLine().toLowerCase().indexOf("yes")<0)
+		{
+			return true;
+		}
+		return false;
+		
+	}
+
+	public static String[][] startGame(String[][] lights2)
 	{	
-		String[][] field = new String[lights.length][lights[0].length];
+		String[][] field = new String[lights2.length][lights2[0].length];
 		for(int row = 0; row < field.length; row++)
 		{
 			for(int col = 0; col < field[row].length; col++)
@@ -31,67 +53,86 @@ public class TobyKevinRoom
 				int random = (int) (Math.random()* 2) + 1;
 				if (random == 2)
 				{
-					field[row][col] = "X";
+					field[row][col] = "O";
 				}
 				else
 				{
-					field[row][col] = "O";
+					field[row][col] = "X";
 				} 
 			}
 		}
 		return field;
 	}
 
-	public static void changeLights()
+	public static void changeLights(String[][] field)
 	{
 		System.out.print("Enter the number of a box (1-25)");
-		int x = Integer.valueOf(input.nextLine());
-		boolean inLoop = true;
-		while(inLoop == true)
+		int number = 0;
+		
+		while(!input.hasNextInt())
 		{
-			if(Integer.valueOf(input.nextLine()).equals(null) || x > 25||x < 1)
-			{
-				System.out.println("Please enter a valid number.");
-			}
-			else
-			{
-				System.out.print("ok");
-				inLoop = false;
-			}
+			System.out.print("That is not a valid input.");
+			input.next();
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//checkWin(lights);
+		number = input.nextInt();
+		if(number > 25||number < 1)
+		{
+			System.out.println("Please enter a valid number between 1 and 25");
+		}
+		else
+		{
+			System.out.println("you have swapped "+number);
+		}
+		swap(field, number);
+		if(number != 1 || number != 6 ||number != 11 || number != 16 || number != 21)
+		{
+			swap(field, number - 1);
+		}
+		if(number != 5 || number != 10 ||number != 15 || number != 20 || number != 25)
+		{
+			swap(field, number + 1);
+		}
+		swap(field, number - 5);
+		swap(field, number + 5);
+		createGrid(field);
+		checkWin();
 	}
 
-	private static void checkWin(boolean[][] lights) 
+	private static void swap(String[][] input, int number) 
 	{
-		for(int row = 0; row < lights.length;row++)
+		int colNumber = (number%5) - 1;
+		if(number%5 == 0)
 		{
-			for (int col = 0; col < lights[row].length;col++)
+			colNumber = 4;
+		}
+		int rowNumber = (int)(number/5);
+		if(number == 5 || number == 10 || number == 15 ||number ==  20 ||number ==  25)
+		{
+			rowNumber = (number/5) - 1;
+		}
+		if(number < 0 || number > 25 || rowNumber < 0 || rowNumber > 4 || colNumber < 0 ||colNumber > 4)
+		{
+			return;
+		}
+		
+		for(int row = 0; row < input.length; row++)
+		{
+			for(int col = 0; col < input[row].length; col++)
 			{
-				if(lights[row][col] == true || lights[row][col] == false)
+				if(input[rowNumber][colNumber] == "O")
 				{
+
 					System.out.println("You have unlocked the hidden passage to the cave");
 					CaveExplorer.Key2 = true;
+					input[rowNumber][colNumber] = "X";
 					break;
+				}else
+				{
+					if(input[rowNumber][colNumber] == "X")
+					{
+						input[rowNumber][colNumber] = "O";
+					}
+
 				}
 			}
 		}
@@ -108,6 +149,7 @@ public class TobyKevinRoom
 			System.out.println();
 		}
 	}
+	
 	public static void createGrid(String[][] field)
 	{
 		map = " ";
@@ -148,3 +190,5 @@ public class TobyKevinRoom
 		CaveExplorer.print(map);
 	}
 }
+
+

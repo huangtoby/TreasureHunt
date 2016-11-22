@@ -12,8 +12,10 @@ public class CaveExplorer {
 	
 	public static InventoryNockles inventory;
 	
+
 	public static boolean Key1 = false;
 	public static boolean Key2 = false;
+
 	
 	public static void main(String[] args) {
 		in = new Scanner(System.in);
@@ -25,6 +27,11 @@ public class CaveExplorer {
 		}
 		currentRoom = caves[2][3];
 		caves[3][3] = new EventRoom("This is where you found the map.", new GameStartEvent());
+		caves[0][3] = new EventRoom("This is where you played minesweeper.", new FultonAnthonyRoom());
+		caves[3][2] = new EventRoom("This is where you got into the cave.", new TobyKevinRoom());
+		if(currentRoom == caves[1][3]){
+			print("you duied");
+		}
 		currentRoom.enter();
 
 		caves[2][3].setConnection(CaveRoomPd8.SOUTH, caves[3][3], new Door());//start, lights out

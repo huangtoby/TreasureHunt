@@ -2,25 +2,27 @@ package TreasureHunting;
 
 import java.util.Scanner;
 
-public class FultonAnthonyRoom {
+import TreasureHunting.Playable;
+
+public class FultonAnthonyRoom implements Playable{
 	private static boolean[][] isChecked;
 	public static boolean[][] mines;
 	private static String[][] arr;
 	private static String map;
 	public static Scanner in;
-	
-	public static void main(String[] args){
+	private String[][] field;
+	public  FultonAnthonyRoom(){
 		in = new Scanner(System.in);
-		mines = new boolean[5][5];
-		isChecked = new boolean[5][5];
+		mines = new boolean[10][10];
+		isChecked = new boolean[10][10];
 		plantMines(mines);
-		String[][] field = createField(mines);
+		field = createField(mines);
 		currentArray();
-		startGame(field);
+		
 	}
 	
 	private static void currentArray(){
-		arr = new String[5][5];
+		arr = new String[10][10];
 		for(int i = 0; i < arr.length; i++){
 			for( int j = 0; j < arr.length; j++){
 				arr[i][j] = "?";
@@ -62,7 +64,7 @@ public class FultonAnthonyRoom {
 	
 	
 	private static void plantMines(boolean[][] mines) {
-		int numberOfMines = 10;
+		int numberOfMines = 17;
 		while(numberOfMines > 0){
 			int row = (int)(Math.random() * mines.length);
 			int col = (int)(Math.random() * mines[0].length);
@@ -92,7 +94,11 @@ public class FultonAnthonyRoom {
 		return false;
 	}
 	
-	public static void startGame(String[][] field){
+	public static void main(String[] args){
+		new FultonAnthonyRoom().play();
+	}
+	
+	public void play(){
 		boolean inLoop = true;
 		boolean win = false;
 //		createGrid(field);
@@ -144,8 +150,13 @@ public class FultonAnthonyRoom {
 			}
 		}
 		if(win){
+<<<<<<< HEAD
 			CaveExplorer.print("Congradulation you have won this game and obtained the key");
 			CaveExplorer.Key1 = true;
+=======
+			CaveExplorer.print("Congratulation you have won this game and obtained the key");
+			CaveExplorer.key2 = true;
+>>>>>>> refs/remotes/origin/master
 		}
 		CaveExplorer.print("you have failed");
 	}
