@@ -29,6 +29,7 @@ public class TobyKevinRoom implements Playable
 			}
 			
 		}
+		CaveExplorer.Key2 = true;
 		System.out.println("You have 'beaten' this game");
 	}
 

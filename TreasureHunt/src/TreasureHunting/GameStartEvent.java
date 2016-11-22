@@ -9,8 +9,6 @@ public class GameStartEvent implements Playable {
 	private static final String[] SEQUENCE_2 = {"I may not be able to help much but this map is the basic outline of this cave.",
 			"Be careful of various traps and deadends. Good luck to you."};
 
-	public GameStartEvent() {
-	}
 
 	public void play() {
 		readSequence(SEQUENCE_1);

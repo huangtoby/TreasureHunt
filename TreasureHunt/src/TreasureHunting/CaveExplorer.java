@@ -13,8 +13,9 @@ public class CaveExplorer {
 	public static InventoryNockles inventory;
 	
 
-	public static boolean Key1 = false;
-	public static boolean Key2 = false;
+	public static boolean Key1 = true;
+	public static boolean Key2 = true;
+	private static boolean Looped = true;
 
 	
 	public static void main(String[] args) {
@@ -54,12 +55,20 @@ public class CaveExplorer {
 	}
 
 	private static void startExploring() {
-		while(true){
+		while(Looped){
+			if(currentRoom == caves[1][1]){ 
+				Looped = false;
+			}
 			print(inventory.getDescription());
 			print(currentRoom.getDescription());
 			print("What would you like to do?");
 			String input = in.nextLine();
 			act(input);
+		}
+		if(Key1 == true && Key2 == true){
+			print("With both the keys, you disabled the treasure room's traps, and made off with the treasure!");
+		}else {
+			print("Without both keys, you were injured by the treasure room's booby traps. You weren't able to escape.");
 		}
 	}
 	

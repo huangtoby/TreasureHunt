@@ -150,13 +150,10 @@ public class FultonAnthonyRoom implements Playable{
 			}
 		}
 		if(win){
-<<<<<<< HEAD
+
 			CaveExplorer.print("Congradulation you have won this game and obtained the key");
 			CaveExplorer.Key1 = true;
-=======
-			CaveExplorer.print("Congratulation you have won this game and obtained the key");
-			CaveExplorer.key2 = true;
->>>>>>> refs/remotes/origin/master
+
 		}
 		CaveExplorer.print("you have failed");
 	}
