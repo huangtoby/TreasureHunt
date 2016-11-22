@@ -30,13 +30,14 @@ public class TobyKevinRoom implements Playable
 			
 		}
 		CaveExplorer.Key2 = true;
-		System.out.println("You have 'beaten' this game and obtained key(1/2)");
+		System.out.println("You have unlocked the hidden passage to the cave");
+		System.out.println("You have 'beaten' this game and obtained the silver skull.");
 		
 	}
 
 	private static boolean checkWin() 
 	{
-		System.out.println("Continue?");
+		
 		if(input.nextLine().toLowerCase().indexOf("yes")<0)
 		{
 			return true;
@@ -97,6 +98,7 @@ public class TobyKevinRoom implements Playable
 		swap(field, number - 5);
 		swap(field, number + 5);
 		createGrid(field);
+		System.out.println("Continue?");
 		checkWin();
 	}
 
@@ -124,7 +126,7 @@ public class TobyKevinRoom implements Playable
 				if(input[rowNumber][colNumber] == "O")
 				{
 
-					System.out.println("You have unlocked the hidden passage to the cave");
+					
 					CaveExplorer.Key2 = true;
 					input[rowNumber][colNumber] = "X";
 					break;
