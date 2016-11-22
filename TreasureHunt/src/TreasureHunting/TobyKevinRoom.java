@@ -30,7 +30,8 @@ public class TobyKevinRoom implements Playable
 			
 		}
 		CaveExplorer.Key2 = true;
-		System.out.println("You have 'beaten' this game");
+		System.out.println("You have 'beaten' this game and obtained key(1/2)");
+		
 	}
 
 	private static boolean checkWin() 
