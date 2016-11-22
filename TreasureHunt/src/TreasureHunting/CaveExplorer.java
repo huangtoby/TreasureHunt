@@ -65,7 +65,7 @@ public class CaveExplorer {
 		if(Key1 == true && Key2 == true){
 			print("Arriving at the treasure room, you see an altar with two skull-shaped holes in it."
 					+ "\nAfter placing the skulls, the air become noticebly less tense and you hear the sounds of grinding stone back at the entrance."
-					+ "\nIt seems you've disabled the it's traps and opened your way home."
+					+ "\nIt seems you've disabled it's traps and opened your way home."
 					+ "\nYou grab the Treasure-a Crystal Skull-and dash for the entrance."
 					+ "\nYou Win! ");
 		}else {
