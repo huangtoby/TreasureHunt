@@ -63,9 +63,13 @@ public class CaveExplorer {
 			act(input);
 		}
 		if(Key1 == true && Key2 == true){
-			print("With both the keys, you disabled the treasure room's traps, and made off with the treasure!");
+			print("Arriving at the treasure room, you see an altar with two skull-shaped holes in it."
+					+ "\nAfter placing the skulls, the air become noticebly less tense and you hear the sounds of grinding stone back at the entrance."
+					+ "\nIt seems you've disabled the it's traps and opened your way home."
+					+ "\nYou grab the Treasure-a Crystal Skull-and dash for the entrance."
+					+ "\nYou Win! ");
 		}else {
-			print("Without both keys, you were injured by the treasure room's booby traps. You weren't able to escape.");
+			print("Without both skulls, you were injured by the treasure room's booby traps.\nYou weren't able to escape.");
 		}
 	}
 	

@@ -151,8 +151,8 @@ public class FultonAnthonyRoom implements Playable{
 		}
 		if(win){
 
-			CaveExplorer.print("Congradulation you have won this game and obtained the key");
-			CaveExplorer.print("You have obtained key(2/2). Now find the Trasure Room!");
+			CaveExplorer.print("With this game completed, you obtained the platinum skull.\n");
+			CaveExplorer.print("All that's left is to find the treasure.");
 			CaveExplorer.Key1 = true;
 
 		}else{

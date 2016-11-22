@@ -30,8 +30,8 @@ public class TobyKevinRoom implements Playable
 			
 		}
 		CaveExplorer.Key2 = true;
-		System.out.println("You have unlocked the hidden passage to the cave");
-		System.out.println("You have 'beaten' this game and obtained the silver skull.");
+		System.out.println("You have unlocked the hidden passage to the cave, along with a hidden panel in the wall,\n revealing an unusual golden skull.");
+		System.out.println("You have 'beaten' this game.");
 		
 	}
 
