@@ -6,8 +6,8 @@ public class GameStartEvent implements Playable {
 			"Greetings traveler, it has been a long time since a human have entered this cave.",
 			"'You notice that the spectral being carries a whip, and the faint sounds of trumpets far off.", 
 			"It is too late for you to escape now. All you can do is find the treasure without dying."};
-	private static final String[] SEQUENCE_2 = {"I may not be able to help much but before I died, I made an outline of the map.",
-			"Beware the treasure room.Without the 'keys'... well, you'll end up looking like me. Good Luck."};
+	private static final String[] SEQUENCE_2 = {"I may not be able to help much but before I died, I made an outline of the ruins.",
+			"Beware the treasure room. Without the 'keys'... well, you'll end up looking like me. Good Luck."};
 
 
 	public void play() {
