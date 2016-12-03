@@ -8,13 +8,12 @@ public class FultonAnthonyRoom implements Playable{
 	private static boolean[][] isChecked;
 	public static boolean[][] mines;
 	private static String[][] arr;
-	private static String map;
 	public static Scanner in;
 	private String[][] field;
 	public  FultonAnthonyRoom(){
 		in = new Scanner(System.in);
 		mines = new boolean[10][10];
-		isChecked = new boolean[10][10];
+		setIsChecked(new boolean[10][10]);
 		plantMines(mines);
 		field = createField(mines);
 		currentArray();
@@ -84,7 +83,7 @@ public class FultonAnthonyRoom implements Playable{
 		boolean inLoop = true;
 		boolean win = false;
 //		createGrid(field);
-		createGrid(arr);
+		checkWinFulton.createGrid(arr);
 		while(inLoop){
 			String row = in.nextLine();
 			if(isValid(row)){
@@ -101,17 +100,17 @@ public class FultonAnthonyRoom implements Playable{
 							String output = response.toLowerCase();
 							if(output.equals("reveal")){
 								if(field[Integer.parseInt(row)][Integer.parseInt(col)] == "x"){
-									createGrid(field);
+									checkWinFulton.createGrid(field);
 									CaveExplorer.print("You ded");
 									inLoop = false;
 								}else{
 									clearBlock(field, Integer.parseInt(row), Integer.parseInt(col));
-									createGrid(arr);
+									checkWinFulton.createGrid(arr);
 									break;
 								}	
 							}else if(output.equals("mark")){
 								mark(field, Integer.parseInt(row), Integer.parseInt(col));
-								createGrid(arr);
+								checkWinFulton.createGrid(arr);
 								break;
 							}else if(output.equals("neither")){
 								win = true;
@@ -124,7 +123,7 @@ public class FultonAnthonyRoom implements Playable{
 					}else{
 						CaveExplorer.print("Please input something that exists"+"\n"+"Try Again");
 					}
-					if(checkWin(field)){
+					if(checkWinFulton.checkWin(field)){
 						win = true;
 						inLoop = false;
 					}
@@ -142,48 +141,22 @@ public class FultonAnthonyRoom implements Playable{
 		}
 	}
 
-	private static boolean checkWin(String[][] field) {
-		for(int row = 0; row < field.length; row++){
-			for(int col = 0; col < field[0].length; col++){
-				if(field[row][col] != "x" && isChecked[row][col] == false){
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
 	private static void clearBlock(String[][] field, int r, int c) {
-		if(isChecked[r][c] == false){
+		if(getIsChecked()[r][c] == false){
 		arr[r][c] = field[r][c];
-		isChecked[r][c] = true;
+		getIsChecked()[r][c] = true;
 		}
 	}
 	
 	private static void mark(String[][] field, int r, int c){
 		arr[r][c] = "!";
 	}
-	
-	public static void createGrid(String[][] array) {
-		map = " ";
-		for(int i = 0; i < array[0].length-1; i++){
-			map += "____";
-		}
-		map += "___\n";
-		for(int i = 0; i < array.length; i++){
-			for(int textRow = 0; textRow < 3; textRow++){
-				for(int j = 0; j < array[i].length; j++){
-					String str = "|" + i + " " + j;
-					if(textRow == 1){
-						str = "| " + array[i][j] + " ";
-					}if(textRow == 2){
-						str = "|___";
-					}
-					map += str;
-				}
-			map += "|\n";
-			}
-		}
-		CaveExplorer.print(map);
+
+	public static boolean[][] getIsChecked() {
+		return isChecked;
+	}
+
+	public static void setIsChecked(boolean[][] isChecked) {
+		FultonAnthonyRoom.isChecked = isChecked;
 	}
 }
