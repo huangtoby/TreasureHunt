@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class TobyKevinRoom implements Playable
 	{
 	public static String[][] lights ;
-	private static String map;
+	
 	public static Scanner input;
 	
 	public static void main(String[] args){
@@ -17,11 +17,11 @@ public class TobyKevinRoom implements Playable
 		input = new Scanner(System.in);
 		lights = new String[5][5];
 		String[][] field = startGame(lights);
-		createGrid(field);
+		CreateToby.createGrid(field);
 		boolean solved = true;
 		A : while(solved)
 		{
-			changeLights(field);
+			ChangeKevin.changeLights(field);
 			if(checkWin() == true)
 			{
 				solved = false;
@@ -35,7 +35,7 @@ public class TobyKevinRoom implements Playable
 		
 	}
 
-	private static boolean checkWin() 
+	public static boolean checkWin() 
 	{
 		
 		if(input.nextLine().toLowerCase().indexOf("yes")<0)
@@ -67,42 +67,7 @@ public class TobyKevinRoom implements Playable
 		return field;
 	}
 
-	public static void changeLights(String[][] field)
-	{
-		System.out.print("Enter the number of a box (1-25)");
-		int number = 0;
-		
-		while(!input.hasNextInt())
-		{
-			System.out.print("That is not a valid input.");
-			input.next();
-		}
-		number = input.nextInt();
-		if(number > 25||number < 1)
-		{
-			System.out.println("Please enter a valid number between 1 and 25");
-		}
-		else
-		{
-			System.out.println("you have swapped "+number);
-		}
-		swap(field, number);
-		if(number != 1 || number != 6 ||number != 11 || number != 16 || number != 21)
-		{
-			swap(field, number - 1);
-		}
-		if(number != 5 || number != 10 ||number != 15 || number != 20 || number != 25)
-		{
-			swap(field, number + 1);
-		}
-		swap(field, number - 5);
-		swap(field, number + 5);
-		createGrid(field);
-		System.out.println("Continue?");
-		checkWin();
-	}
-
-	private static void swap(String[][] input, int number) 
+	public static void swap(String[][] input, int number) 
 	{
 		int colNumber = (number%5) - 1;
 		if(number%5 == 0)
@@ -154,45 +119,6 @@ public class TobyKevinRoom implements Playable
 		}
 	}
 	
-	public static void createGrid(String[][] field)
-	{
-		map = " ";
-		for(int i = 0; i < field[0].length-1; i++)
-		{
-			map += "______";
-		}
-		map += "_____\n";
-		for(int i = 0; i < field.length; i++)
-		{
-			for(int textRow = 0; textRow < 3; textRow++)
-			{
-				for(int j = 0; j < field[i].length; j++)
-				{
-					int boxNumber = i*5+i/5+j+1;
-					String str = "|  " + boxNumber + "  ";
-					if (boxNumber > 9 && boxNumber < 100)
-					{
-						str = "|  " + boxNumber + " ";
-					}
-					if (boxNumber <= 10 && boxNumber >=99)
-					{
-						str = "|  " + boxNumber + "  ";
-					}
-					if(textRow == 1)
-					{
-						str = "|  " + field[i][j] + "  ";
-					}
-					if(textRow == 2)
-					{
-						str = "|_____";
-					}
-					map += str;
-				}
-				map += "|\n";
-			}
-		}
-		CaveExplorer.print(map);
-	}
 }
 
 
