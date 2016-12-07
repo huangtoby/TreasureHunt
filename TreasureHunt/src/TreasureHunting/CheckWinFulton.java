@@ -1,6 +1,6 @@
 package TreasureHunting;
 
-public class checkWinFulton {
+public class CheckWinFulton {
 	private static String map;
 	
 	public static boolean checkWin(String[][] field) {
