@@ -83,7 +83,7 @@ public class FultonAnthonyRoom implements Playable{
 		boolean inLoop = true;
 		boolean win = false;
 //		createGrid(field);
-		checkWinFulton.createGrid(arr);
+		CheckWinFulton.createGrid(arr);
 		while(inLoop){
 			String row = in.nextLine();
 			if(isValid(row)){
