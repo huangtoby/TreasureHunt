@@ -100,17 +100,17 @@ public class FultonAnthonyRoom implements Playable{
 							String output = response.toLowerCase();
 							if(output.equals("reveal")){
 								if(field[Integer.parseInt(row)][Integer.parseInt(col)] == "x"){
-									checkWinFulton.createGrid(field);
+									CheckWinFulton.createGrid(field);
 									CaveExplorer.print("You ded");
 									inLoop = false;
 								}else{
 									clearBlock(field, Integer.parseInt(row), Integer.parseInt(col));
-									checkWinFulton.createGrid(arr);
+									CheckWinFulton.createGrid(arr);
 									break;
 								}	
 							}else if(output.equals("mark")){
 								mark(field, Integer.parseInt(row), Integer.parseInt(col));
-								checkWinFulton.createGrid(arr);
+								CheckWinFulton.createGrid(arr);
 								break;
 							}else if(output.equals("neither")){
 								win = true;
@@ -123,7 +123,7 @@ public class FultonAnthonyRoom implements Playable{
 					}else{
 						CaveExplorer.print("Please input something that exists"+"\n"+"Try Again");
 					}
-					if(checkWinFulton.checkWin(field)){
+					if(CheckWinFulton.checkWin(field)){
 						win = true;
 						inLoop = false;
 					}
